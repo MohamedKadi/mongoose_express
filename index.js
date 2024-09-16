@@ -22,6 +22,7 @@ async function main() {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+const categories = ['fruit', 'vegetable', 'dairy', 'oils', 'bimos'];
 
 app.get('/products', async (req,res)=>{
     const products = await Product.find({});
@@ -45,12 +46,11 @@ app.get('/products/:id', async (req,res)=>{
 app.get('/products/:id/edit', async (req,res)=>{
   const {id} = req.params;
   const product = await Product.findById(id);
-  res.render('products/edit',{product: product});
+  res.render('products/edit',{product: product, categories: categories});
 })
 app.put('/products/:id', async (req,res)=>{
   const {id} = req.params;
   const product = await Product.findByIdAndUpdate(id,req.body,{runValidators: true, new: true});
-  console.log(product);
   res.redirect('/products/'+product._id);
 })
 

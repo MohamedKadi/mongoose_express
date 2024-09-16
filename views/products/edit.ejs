@@ -13,11 +13,9 @@
         <label for="">category</label>
         <select name="category">
             <option value="">--Please choose an option--</option>
-            <option value="fruit" <%= product.category === 'fruit' ? 'selected' : '' %> >fruit</option>
-            <option value="vegetable" <%= product.category === 'vegetable' ? 'selected' : '' %>>vegetable</option>
-            <option value="dairy" <%= product.category === 'dairy' ? 'selected' : '' %>>dairy</option>
-            <option value="oils" <%= product.category === 'oils' ? 'selected' : '' %>>oils</option>
-            <option value="bimos" <%= product.category === 'bimos' ? 'selected' : '' %>>bimos</option>
+            <% for(let category of categories){ %>
+            <option value="<%= category %>" <%= category === product.category ? 'selected' : '' %> ><%= category %></option>
+            <% } %>
         </select>
         <br>
         <br>
