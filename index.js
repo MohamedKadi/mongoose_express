@@ -4,6 +4,9 @@ const path = require('path');
 const mongoose = require('mongoose');
 const ejs = require('ejs');
 
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
 const Product = require('./models/product');
 
 main().catch(err => console.log(err));
@@ -22,6 +25,11 @@ app.get('/products', async (req,res)=>{
     const products = await Product.find({});
     console.log(products);
     res.render('products/index',{products: products});
+})
+app.get('/products/:id', async (req,res)=>{
+  const {id} = req.params;
+  const product = await Product.findById(id);
+  res.render('products/show',{product: product});
 })
 
 app.listen(3000, ()=>{
