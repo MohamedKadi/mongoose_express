@@ -31,7 +31,6 @@ app.get('/products/new',(req,res) => {
 app.post('/products', async(req,res)=>{
   const {name , price, category} = req.body;
   const newProduct = await Product.create({name: name, price: price, category:category});
-  newProduct.save();
   res.redirect('products');
   // const {name, price, category} = req.body;
   // res.redirect('products');
