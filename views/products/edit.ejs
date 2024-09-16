@@ -1,0 +1,28 @@
+<%- include('../partials/header') %>
+
+<h1>UPDATING A Product</h1>
+    <form action="/products/<%= product._id %>?_method=PUT" method="post">
+        <label for="">name</label>
+        <input type="text" name="name" value="<%= product.name %>">
+        <br>
+        <br>
+        <label for="">price</label>
+        <input type="text" name="price" value="<%= product.price %>">
+        <br>
+        <br>
+        <label for="">category</label>
+        <select name="category">
+            <option value="">--Please choose an option--</option>
+            <option value="fruit" <%= product.category === 'fruit' ? 'selected' : '' %> >fruit</option>
+            <option value="vegetable" <%= product.category === 'vegetable' ? 'selected' : '' %>>vegetable</option>
+            <option value="dairy" <%= product.category === 'dairy' ? 'selected' : '' %>>dairy</option>
+            <option value="oils" <%= product.category === 'oils' ? 'selected' : '' %>>oils</option>
+            <option value="bimos" <%= product.category === 'bimos' ? 'selected' : '' %>>bimos</option>
+        </select>
+        <br>
+        <br>
+        <button>submit</button>
+    </form>
+    <a href="/products">All products</a>
+
+<%- include('../partials/footer') %>
