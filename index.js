@@ -23,14 +23,26 @@ app.set('view engine', 'ejs');
 
 app.get('/products', async (req,res)=>{
     const products = await Product.find({});
-    console.log(products);
     res.render('products/index',{products: products});
+})
+app.get('/products/new',(req,res) => {
+  res.render('products/new');
+})
+app.post('/products', async(req,res)=>{
+  const {name , price, category} = req.body;
+  const newProduct = await Product.create({name: name, price: price, category:category});
+  newProduct.save();
+  res.redirect('products');
+  // const {name, price, category} = req.body;
+  // res.redirect('products');
 })
 app.get('/products/:id', async (req,res)=>{
   const {id} = req.params;
   const product = await Product.findById(id);
   res.render('products/show',{product: product});
 })
+
+
 
 app.listen(3000, ()=>{
     console.log("APP IS LISTENING ON PORT 3000");
