@@ -31,6 +31,11 @@ app.get('/products', async (req,res)=>{
 app.get('/products/new',(req,res) => {
   res.render('products/new');
 })
+app.get('/products/category', async(req,res)=>{
+  const {category} = req.query;
+  const productCategory = await Product.find({category});
+  res.render('products/category_show',{productCategory});
+})
 app.post('/products', async(req,res)=>{
   const {name , price, category} = req.body;
   const newProduct = await Product.create({name: name, price: price, category:category});
@@ -43,6 +48,7 @@ app.get('/products/:id', async (req,res)=>{
   const product = await Product.findById(id);
   res.render('products/show',{product: product});
 })
+
 app.get('/products/:id/edit', async (req,res)=>{
   const {id} = req.params;
   const product = await Product.findById(id);

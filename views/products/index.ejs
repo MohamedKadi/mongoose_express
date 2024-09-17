@@ -2,7 +2,7 @@
 <h1>ALL PRODUCTS</h1>
 <ul>
     <% products.forEach((product) => { %>
-    <li><%= product.name %>: <%= product.price %> DH : <b><%= product.category %></b></li>
+    <li><%= product.name %>: <%= product.price %> DH : <b><a href="/products/category?category=<%= product.category %>"><%= product.category %></a></b></li>
     <a href="/products/<%= product._id %>">details</a>
     <% }); %>
 </ul>
