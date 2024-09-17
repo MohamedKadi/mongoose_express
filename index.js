@@ -24,18 +24,22 @@ app.set('view engine', 'ejs');
 
 const categories = ['fruit', 'vegetable', 'dairy', 'oils', 'bimos'];
 
-app.get('/products', async (req,res)=>{
+app.get('/products', async(req,res)=>{
+  const {category} = req.query;
+  if(category){
+    const products = await Product.find({category});
+    res.render('products/index',{products, category});
+  }else{
     const products = await Product.find({});
-    res.render('products/index',{products: products});
+    res.render('products/index',{products: products, category: 'ALL'});
+  }
+  
+  
 })
 app.get('/products/new',(req,res) => {
   res.render('products/new');
 })
-app.get('/products/category', async(req,res)=>{
-  const {category} = req.query;
-  const productCategory = await Product.find({category});
-  res.render('products/category_show',{productCategory});
-})
+
 app.post('/products', async(req,res)=>{
   const {name , price, category} = req.body;
   const newProduct = await Product.create({name: name, price: price, category:category});

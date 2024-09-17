@@ -1,8 +1,8 @@
 <%- include('../partials/header'); -%>
-<h1>ALL PRODUCTS</h1>
+<h1><%= category %> PRODUCTS</h1>
 <ul>
     <% products.forEach((product) => { %>
-    <li><%= product.name %>: <%= product.price %> DH : <b><a href="/products/category?category=<%= product.category %>"><%= product.category %></a></b></li>
+    <li><%= product.name %>: <%= product.price %> DH : <b><a href="/products?category=<%= product.category %>"><%= product.category %></a></b></li>
     <a href="/products/<%= product._id %>">details</a>
     <% }); %>
 </ul>
